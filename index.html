@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+	<!--
+		
+		
+		Notice:
+			ios9.0系统以下不支持es6语法，需要转码
+		
+		
+	-->
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="shortcut icon" href="./img/icons-firefox-50.png"/>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link href="./img/icon-bg-tsp.jpg" rel="shortcut icon" />
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<title>墨尔本清洁</title>
+		<style>
+			
+			/*公共样式*/
+			a{
+				text-decoration: none;
+				cursor: pointer;
+			}
+			ul li{
+				padding: 5px 8px;
+				font: inherit;
+				float: left;
+				box-sizing: border-box;
+				font-size: 1rem;
+			}
+			ul li a:hover{
+				color: tomato;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			
+		
+			/*头部样式*/
+			header{
+				width: 100%;
+				height: 88px;
+				position: sticky;
+				position: -webkit-sticky;
+				left: 0;
+				top: 0;
+				background-color: transparent;
+				font: normal 14px "微软雅黑";
+				color: white;
+				z-index: 1000;
+			}
+			header div{
+				height: 88px;
+			}
+			.wall{
+				width: 100%;
+				height: 88px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: white;
+				z-index: -500;
+			}
+			
+			/*Home*/
+			.Home{
+				width: 100%;
+				height: 900px;
+				background: url(img/wall.jpeg) no-repeat;
+				background-position-y: 0;
+				position: relative;
+				top: -88px;
+				color: white;
+			}
+			.b-wall{
+				width: 100%;
+				height: 900px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: rgba(0,0,0,.2);
+				z-index: 100;
+			}
+			.Home>div{
+				width: 100%;
+				position: absolute;
+				bottom: -1px;
+			} 
+			.Home .container-fluid{
+				z-index: 500;
+			}
+			.Home h3{
+					font-size: 50px !important;
+    				line-height: 1.5em !important;    				
+    				letter-spacing: -0.03em;
+    				font-weight: 100;
+    				transform: scaleY(1.03);
+			}
+			.Home h5{
+				font-family: 'Roboto', sans-serif;
+			    font-size: 16px;
+			    line-height: 1.53486;
+			    font-weight: 200;
+			    letter-spacing: -0.03em;
+			}
+			.Home strong{
+				font-size: 50px;
+				font-weight: bold;
+			}
+			
+			/*Overview*/
+			.Overview h3,.Benefits h3,.Case h3,.Aboutus h3,.Contactus h3{
+				font-weight: 100;
+				line-height: 1.1;
+    			letter-spacing: -0.05em;
+    			color: #404040;
+    			margin-bottom: 1rem;
+    			transform: scaleY(1.03);
+			}
+			.Overview>p,.Benefits>p,.Case>p,.Aboutus>p,.Contactus p{
+				font:100 0.9rem/1.2rem "'Roboto', sans-serif";
+			}
+			
+			/*Aboutus*/
+			.Aboutus{
+				height: 600px;
+				overflow-x: hidden;
+			}
+			.Aboutus .scoll-img{
+				width: 50%;
+				position: absolute;
+				left: 0;top: 0;right: 0;bottom: 0;
+				margin: auto;
+			}
+			.scoll-img h3{
+				font-size: 1rem;
+			}
+			
+			/*footer*/
+			footer{
+				padding-bottom: 100px!important;
+				background-color: #2b2b2b;
+			}
+			footer .pst-a{
+				width: 100%;
+				bottom: 0;
+				left: 0;
+				background-color: #242424;
+			    color: #666;
+			    border-top: 1px solid #222;
+			    padding: 18px 0;
+			    font-size: 12px;
+			}
+			
+			/*借用h6定位滚动*/
+			h6{
+				position: absolute;
+				top: -80px;
+			}
+			
+			/*功能性通用样式*/
+			.pst-r{
+				position: relative;
+			}
+			.pst-a{
+				position: absolute;
+			}
+			.pst-f{
+				position: fixed;
+			}
+			
+			.w20{
+				width: 20%;
+			}
+			.w30{
+				width: 30%;
+			}
+			.w38{
+				width: 38%;
+			}
+			.w40{
+				width: 40%;
+			}
+			.w50{
+				width: 50%;
+			}
+			.w60{
+				width: 60%;
+				margin: auto;
+			}
+			.w62{
+				width: 62%;
+			}
+			.w70{
+				width: 70%;
+			}
+			.w80{
+				width: 80%;
+			}
+			
+			.h100{
+				height: 100px;
+			}
+			.h220{
+				height: 220px;
+			}
+			.h400{
+				height: 448px;
+			}
+			.h448{
+				height: 448px;
+			}
+			
+			.mat{
+				margin: auto;
+			}
+			.ml0{
+				margin-left: 0!important;
+			}
+			.ml10{
+				margin-left: 10px!important;
+			}
+			.mlr5{
+				margin: 0 5px;
+			}
+			.mt0{
+				margin-top: 0px!important;
+			}
+			.mt5{
+				margin-top: 5px;
+			}
+			.mt10{
+				margin-top: 10px;
+			}
+			.mt20{
+				margin-top: 20px;
+			}
+			.mt25{
+				margin-top: 25px;
+			}
+			.mt30{
+				margin-top: 30px!important;
+			}
+			.mt50{
+				margin-top: 50px!important;
+			}
+			.mt90{
+				margin-top: 90px!important;
+			}
+			.mb0{
+				margin-bottom: 0!important;
+			}
+			.mtb10{
+				margin: 10px 0!important;
+			}
+			.mtb15{
+				margin: 15px 0!important;
+			}
+			
+			
+			.p25{
+				padding: 25px;
+			}
+			.pl0{
+				padding-left: 0!important;
+			}
+			.pl10{
+				padding-left: 10px!important;
+			}
+			.pl15{
+				padding-left: 15px;
+			}
+			.pr15{
+				padding-right: 15px;
+			}
+			.pt50{
+				padding-top: 50px;
+			}
+			.pb50{
+				padding-bottom: 50px;
+			}
+			.p50{
+				padding: 50px;
+			}
+			.ptb10{
+				padding: 10px 0;
+			}
+			
+			.flex{
+				display: flex;
+			}
+			.flex-center{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				align-content: center;
+			}
+			.flex-center-vtc{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+			}
+			.flex-justify{
+				justify-content: space-between;
+			}
+			
+			
+			.font_gray{
+				color: #555;
+			}
+			.font_silver{
+				color: #ccc;
+			}
+			.font_white{
+				color: #fff!important;
+			}
+			.font_tomato{
+				color:tomato;
+			}
+			.font_600{
+				font-weight: 600!important;	
+				transform: scaleY(1.2);
+			}
+			.font_100{
+				font-weight: 100!important;	
+
+			}
+			.font_50{
+				font-size: 50px!important;
+			}
+			.font_13{
+				font-size: 13px;
+				line-height: 1rem;
+			}
+			.lh1p5{
+				line-height: 1.5;
+			}
+			.font_dsc{
+				font:300 13px/1.5 "'Roboto', sans-serif";
+				color: #868686;
+			}
+			
+			.bg-gray{
+				background-color: #f6f8fa;
+			}
+			.bg-darksea{
+				background-color: rgba(9, 24, 39, .9);
+			}
+			
+			.red-line{
+				width: 7.5%;
+				border-bottom: 3px solid tomato;
+				
+			}
+			
+			/*动态过渡  顶部动画，大图片由下划上，用户墙展示*/
+			.fade-enter-active, .fade-leave-active{
+			  	transition: all .5s;
+			}
+			.fade-enter, .fade-leave-to{
+			  	opacity: 0;
+			}
+			
+			.imgin-enter-active, .imgin-leave-active{
+			  	transition: all 1s;
+			}
+			.imgin-enter, .imgin-leave-to{
+			  	opacity: 0;
+			  	transform: translateY(488px);
+			}
+			
+			.flip-enter-active, .flip-leave-active{
+				position: absolute;
+			  	transition: all 1s;
+			}
+			.flip-enter{
+				opacity: 0;
+			  	transform: translateX(600px);
+			}
+			.flip-leave-to{
+				opacity: 0;
+			  	transform: translateX(-600px);
+			}
+			
+			/*媒体查询*/
+			@media only screen and (min-width:1366px){
+				.sb-img-fit{
+					background-size: 100% 100%;
+				}
+			}
+			@media only screen and (min-width: 0px) and (max-width: 413px) {
+				.img-fit{
+					width: 100%;
+					height: auto;
+				}
+				.sm-img-fit{
+					width: 50%;
+					margin: auto;
+					display: block;
+				}
+				.text-fit{
+					text-align: center;
+				}
+				.icon-flex-fit ul{
+					width: 100%;
+					flex-direction: column!important;
+				}
+				.icon-flex-fit li{
+					padding: 0!important;
+				}
+			}
+			@media only screen and (min-width: 414px) and (max-width: 767px) {
+				.img-fit{
+					width: 100%;
+					display: block;
+					margin: auto;
+				}
+				.sm-img-fit{
+					width: 50%;
+					margin: auto;
+					display: block;
+				}
+				.text-fit{
+					text-align: center;
+				}
+				.icon-flex-fit ul{
+					width: 100%;
+					flex-direction: column!important;
+				}
+				.icon-flex-fit li{
+					padding: 0!important;
+				}
+			}
+			@media only screen and (min-width: 768px) and (max-width: 768px) {
+				.text-fit{
+					text-align: center;
+				}
+				.img-fit,.flex-fit{
+					display: flex;
+					justify-content: center;
+				}
+				.b-img-fit{
+					margin: auto;
+				}
+			}
+			@media only screen and (min-width: 769px) and (max-width: 1024px) {
+				.img-fit{
+					width: 30%;
+				}
+				.b-img-fit{
+					width: 100%;
+				}
+				.sm-img-fit{
+					width: 100%;
+				}
+				.float-fit{
+					float: right!important;
+				}
+			}
+			
+			/*效果demo*/
+			.ipicon{
+				width: 206px;
+				height: 70px;
+				background: rgba(0,0,0,.75);
+				border-radius: 12px;
+			}
+			.ipicon dt{
+				height: 70px;
+				margin-top: 3px;
+			}
+			.ipicon dt img{
+				margin-top: -4px;
+			}
+			.ipicon dd{
+				height: 50px;
+				margin-top: 13px;
+			}
+			.ipicon p{
+				width: 100%;
+				font: normal 13px/13px "'Roboto', sans-serif";
+			}
+			.ipicon h3{
+				width: 100%;
+				font: normal 23px "'Roboto', sans-serif"!important;
+				font-weight: 600;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" class="pst-r">
+			<header>
+				<div>
+					<div class="w30 pull-left flex-center">			
+						<img src="img/icon-bg-tsp.jpg" width="180" height="108"/>
+					</div>
+					<div class="w70 pull-right col-sm-9 flex-center">
+						<ul>
+							<li v-if="langCn" @click="toDiv(index)" :class="{font_gray:fgray}" v-for="(item,index) in navData_e">
+								<a>
+									{{item}}
+								</a>
+							</li>
+							<li v-if="langEn" @click="toDiv(index)" :class="{font_gray:fgray}" v-for="(item,index) in navData_e">
+								<a>
+									{{item}}
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<transition name="fade">
+					<div v-if="wall" class="wall"></div>
+				</transition>	
+			</header>
+			<section class="Home sb-img-fit">
+				<div class="container-fluid">
+					<div class="container">
+						<div class="row">
+							<section class="mt90 col-md-6 col-sm-12">
+								<!--<div><img src="img/icons-firefox-50.png"/></div>-->
+								<h3 class="h3 text-fit">
+									Clean the House with
+									<br />
+									<strong>Cleaner.</strong>
+								</h3>
+								<h5 class="h5 text-fit">Any part.Any time.AnyWhere</h5>
+								<ul class="mtb15 clearfix flex-fit">
+									<li class="pull-left pl0 img-fit">										
+										<div class="sm-img-fit ipicon">
+											<dl>
+												<dt class="pull-left flex-center-vtc w38">
+													<img width="75%" src="img/icon/icons-wx-96.png"/>
+												</dt>
+												<dd class="font_white w62 pull-left flex-center-vtc">
+													<p class="font_silver text-left">Available on the</p>
+													<h3 class="text-left">WeChat</h3>
+												</dd>
+											</dl>
+										</div>
+									</li>
+									<li class="pull-left float-fit img-fit">										
+										<div class="sm-img-fit ipicon">
+											<dl>
+												<dt class="pull-left flex-center-vtc w38">
+													<img width="60%" src="img/icon/icons-mac-os-96.png"/>
+												</dt>
+												<dd class="font_white w62 pull-right flex-center-vtc">
+													<p class="font_silver text-left">Coming soon to</p>
+													<h3 class="text-left">App Store</h3>
+												</dd>
+											</dl>
+										</div>
+									</li>
+								</ul>
+							</section>
+							<section class="col-md-6 col-sm-12">
+								<div class="col-md-8 col-md-offset-4 col-sm-12">
+									<img class="img-fit b-img-fit" src="img/phone1.1.png"/>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+				<div class="b-wall"></div>
+			</section>
+			<section class="Overview pb50 pst-r">
+				<!--改组件，section部分的通用头部-->
+				<h3 class="text-center font_50 font_gray">
+					Choose the service you<br />
+					<strong class="font_600">Need</strong>
+				</h3>
+				<div class="flex-center">
+					<div class="red-line"></div>
+				</div>
+				<!--改组件，section部分的通用头部-->
+				<div class="container mt30">
+					<div class="col-md-4 col-sm-12 flex-center-vtc h448">
+						<dl v-for="item in OverviewData_p1">
+							<dt class="pull-left w80 lh1p5">
+								<h5 class="text-right">{{item.tittle}}</h5>
+								<p class="text-right font_dsc">
+									{{item.dsc}}
+								</p>
+							</dt>
+							<dd class="pull-right w20 flex-center mt10 pl15">
+								<img :src="item.src"/>
+							</dd>
+						</dl>
+					</div>
+					<div class="col-md-4 col-sm-12">
+						<transition name="imgin">
+<!--
+img去掉img-fit样式影响未测
+-->
+							<img v-if="imgin&&imgTimes" class="center-block" width="80%" src="img/wx-inner03.jpg"/>
+						</transition>
+					</div>
+					<div class="col-md-4 col-sm-12 flex-center-vtc h448">
+						<dl v-for="item in OverviewData_p2">
+							<dt class="pull-right w80 lh1p5">
+								<h5 class="text-left">{{item.tittle}}</h5>
+								<p class="text-left font_dsc">
+									{{item.dsc}}
+								</p>	
+							</dt>
+							<dd class="pull-left w20 flex-center mt10 pr15">			
+								<img :src="item.src"/>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<h6></h6>
+			</section>
+			<section class="Benefits p50 bg-gray clearfix pst-r">
+				<h3 class="text-center font_50 font_gray">
+					Why <strong class="font_600">us</strong>
+				</h3>
+				<div class="flex-center">
+					<div class="red-line"></div>
+				</div>
+				<p class="w60 font_100 text-center mt30">			
+					Professional, convenient and safe, reputation is the foundation of Cleaning duck.
+				</p>
+				<div class="col-md-10 col-md-offset-1 mt50">
+					<dl v-for="item in BenefitsData" class="col-md-4 col-sm-12 mtb15">
+						<dt class="flex-center">
+							<img :src="item.src"/>
+						</dt>
+						<dd>
+							<h5 class="text-center lh1p5 mtb10">
+								{{item.tittle}}
+							</h5>
+							<p class="text-center font_dsc">
+								{{item.dsc}}
+							</p>
+						</dd>
+					</dl>
+				</div>
+				<h6></h6>
+			</section>
+			<section class="Case p50 clearfix pst-r">
+				<h3 class="text-center font_50 font_gray">
+					Get an inside look at <strong class="font_600">our jobs</strong>
+				</h3>
+				<div class="flex-center">
+					<div class="red-line"></div>
+				</div>
+				<p class="w60 font_100 text-center mt30">			
+					The Cleaners' in-app messaging and payment features allow for seamless transactions
+					and communication so you won't have to add any extra time to your wait.
+				</p>
+				<div class="col-md-10 col-md-offset-1 mt50">
+					<ul v-for="item in imgWall">
+						<li class="col-md-3">
+							<img class="center-block" width="80%" height="130" :src="item"/>
+						</li>
+					</ul>
+				</div>
+				<h6></h6>
+			</section>
+			<section class="Aboutus bg-darksea pt50 clearfix pst-r">
+				<h3 class="text-center font_50 font_white">
+					What <strong class="font_600">The Cleaners users</strong> are saying	
+				</h3>
+				<div class="flex-center">
+					<div class="red-line"></div>
+				</div>
+				
+<!--用户滚动-->		
+			<div class="pst-r h400">
+				<transition name="flip">
+					<div v-if="flag" key="user01" class="scoll-img h220 flex-center-vtc flex-justify">
+						<h3 class="font_white text-center mb0">
+							Cleaner is awesome!
+						</h3>
+						<div class="center-block">
+							<img width="100" height="100" class="img-circle" src="img/user-2.jpg"/>
+						</div>
+						<p class="font_white font_13 text-center">
+							Kim <span class="font_tomato">Williams</span><br />
+							<span class="font_gray text-center">Happy App User</span>
+						</p>
+					</div>
+		
+					<div v-else key="user02" class="scoll-img h220 flex-center-vtc flex-justify">
+						<h3 class="font_white text-center mb0">
+							Cool app!Love the idea
+						</h3>
+						<div class="center-block">
+							<img width="100" height="100" class="img-circle" src="img/user-1.jpg"/>
+						</div>
+						<p class="font_white font_13 text-center">
+							Rick <span class="font_tomato">Johnson</span><br />
+							<span class="font_gray text-center">Happy App User</span>
+						</p>
+					</div>
+				</transition>
+			</div>	
+			<h6></h6>
+<!--用户滚动-->					
+				
+			</section>
+			<section class="Contactus p50 clearfix pst-r">
+				<h3 class="text-center font_50 font_gray">
+					Download <strong class="font_600">The Cleaners</strong> now and <br />
+					start spending <strong class="font_600">your time</strong> the <br />
+					way that you want.
+				</h3>
+				<div class="flex-center mt30">
+					<div class="red-line"></div>
+				</div>
+				<p class="w60 font_100 text-center mt30">			
+					Available in WeChat. Coming soon to iOS.
+				</p>		
+				<div class="clearfix flex-center icon-flex-fit">						
+					<ul class="mtb15 clearfix flex-center w70">
+						<li class="pull-left pl0 img-fit">										
+							<div class="sm-img-fit ipicon">
+								<dl>
+									<dt class="pull-left flex-center-vtc w38">
+										<img width="75%" src="img/icon/icons-wx-96.png"/>
+									</dt>
+									<dd class="font_white w62 pull-left flex-center-vtc">
+										<p class="font_silver text-left">Available on the</p>
+										<h3 class="text-left font_white mb0">WeChat</h3>
+									</dd>
+								</dl>
+							</div>
+						</li>
+						<li class="pull-left float-fit img-fit">										
+							<div class="sm-img-fit ipicon">
+								<dl>
+									<dt class="pull-left flex-center-vtc w38">
+										<img width="60%" src="img/icon/icons-mac-os-96.png"/>
+									</dt>
+									<dd class="font_white w62 pull-right flex-center-vtc">
+										<p class="font_silver text-left">Coming soon to</p>
+										<h3 class="text-left font_white mb0">App Store</h3>
+									</dd>
+								</dl>
+							</div>
+						</li>
+					</ul>
+				</div>		
+				<h6></h6>
+			</section>
+			<footer class="pt50 pst-r clearfix">
+				<div class="col-md-4 col-sm-12 text-justify">
+					<h3 class="font_silver text-center">THE CLEANER DUCK</h3>
+					<p class="font_dsc ptb10">
+Cleaning duck is a mobile Internet company, is a family to provide quality service and the enterprise 
+logistics service platform, users can make an appointment online cleaning services, household cleaning, 
+home maintenance, nanny, month sister-in-law, parenting sister-in-law, air pollution, move, home in new 
+services, maintenance, and cover the Australian cities.
+					</p>
+					<p>
+						<a class="font_tomato font_13">
+							Back to overview»
+						</a>
+					</p>
+				</div>
+				<div class="col-md-4 col-sm-12 flex-center-vtc">
+					<h3 class="font_silver">CONTACT</h3>
+					<p class="ptb10">
+						<a class="font_tomato font_13">
+							ape_gene@163.com
+						</a>
+					</p>
+				</div>
+				<div class="col-md-4 col-sm-12 flex-center-vtc">
+					<h3 class="font_silver">SOCIAL</h3>
+					<div class="flex-center ptb10">
+						<img width="25" height="25" class="mlr5" src="img/icon/icons-cleaner-2-50.png"/>
+						<img width="25" height="25" class="mlr5" src="img/icons-firefox-50.png"/>
+					</div>
+				</div>
+				<div class="pst-a text-center">
+					© The Cleaners App All Rights Reserved 2017
+				</div>
+			</footer>
+		</div>
+	</body>
+	<!--
+		
+		问题：sticky在火狐中不管用
+		
+	-->
+	<script>
+	
+		new Vue({
+			el:"#app",
+			data:{
+				navData_c:['首页','公众号预览','我们的服务','服务案例','关于我们','联系我们'],
+				navData_e:['Home','Overview','Benefits','Case','About Us','Contact Us'],
+				navClass:['Home','Overview','Benefits','Case','Aboutus','Contactus'],
+				OverviewData:[
+				{
+					tittle:"Daily Cleaning",
+					dsc:`Daily cleaning is a regular cleaning for household users. 
+					It is recommended that users with daily cleaning needs use it`,
+					src:"img/icon/icon-skill-0.png"	
+				},
+				{
+					tittle:"Clean the Windows",
+					dsc:`Professional tools, standard process, remove screen window, dust and dirt, give attention to details, return glass shining clean`,
+					src:"img/icon/icon-skill-1.png"	
+				},
+				{
+					tittle:"Deep Cleaning",
+					dsc:`A multi-person team of cleaning and cleaning services carries cleaning tools, 
+					comprehensively dedusting and descaling, and classifies household goods.`,
+					src:"img/icon/icon-skill-2.png"	
+				},
+				{
+					tittle:"Toilet cleaning",
+					dsc:`Toilet is the important place that daily household keeps clean,
+					Suggest to do toilet maintenance once every 3 months`,
+					src:"img/icon/icon-skill-3.png"	
+				},
+				{
+					tittle:"Kitchen cleaning",
+					dsc:`Kitchen cleanliness is directly related to the safety and health of family members\' diet. 
+					It is recommended maintenance twice a year`,
+					src:"img/icon/icon-skill-4.png"	
+				},
+				{
+					tittle:"Long - term household cleaning",
+					dsc:`The platform is optimized for experienced cleaners, 
+					which can provide flexible, convenient and fast long - term hourly services`,
+					src:"img/icon/icon-skill-5.png"	
+				}
+				],
+				BenefitsData:[
+				{
+					tittle:"Professional",
+					dsc:`Service personnel strictly screen, select the best admission,
+					system training, professional tools, standardization process`,
+					src:"img/icon/icon-us-1.png"	
+				},
+				{
+					tittle:"Convenient",
+					dsc:`Make an appointment anywhere, anytime; Personalized
+					demand intelligent matching, multiple payment methods, easy payment`,
+					src:"img/icon/icon-us-2.png"	
+				},
+				{
+					tittle:"Security",
+					dsc:`Service personnel 100% real-name certification, home service household insurance escort`,
+					src:"img/icon/icon-us-3.png"	
+				},
+				],
+				imgWall:[
+				"img/case/case1.jpg",
+				"img/case/case2.jpg",
+				"img/case/case3.jpg",
+				"img/case/case4.jpg",
+				"img/case/case5.jpg",
+				"img/case/case6.jpg",
+				"img/case/case8.jpg",
+				"img/case/case9.jpg"
+				],
+				langCn:true,
+				langEn:false,
+				fgray:false,
+				wall:false,
+				imgin:false,
+				imgTimes:false,
+				flag:false,
+			},
+			methods:{
+				changeLang(){
+					this.langEn = !this.langEn;
+					this.langCn = !this.langCn;
+				},
+				toDiv(i){
+					let t = `.${this.navClass[i]}`;
+					t = (t == '.Home')?t:t+'>h6';
+					document.querySelector(t).scrollIntoView({block:'start',behavior:'smooth'});			
+				}
+			},
+			created(){
+				let self = this;
+//	监听滚动，触顶header变色				
+				document.addEventListener("scroll",()=>{
+					let t = window.pageYOffset;
+					if(t){
+						this.wall = true;
+						this.fgray = true;
+					}else{
+						this.wall = false;
+						this.fgray = false;
+					}
+//	控制图片第一次滑入，且只滑入一次
+					if(t>=540){
+						this.imgin = true;
+						this.imgTimes = true;
+					}
+				});
+//	用户图片轮播	
+				let userLoop = setInterval(()=>{
+					self.flag = !self.flag;
+				},3500);
+			},
+			computed: {
+				OverviewData_p1(){
+					return this.OverviewData.slice(0,3)
+				},
+				OverviewData_p2(){
+					return this.OverviewData.slice(3,6)
+				}
+			}
+		})
+	</script>
+</html>
+
