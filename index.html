@@ -51,18 +51,78 @@
 				color: white;
 				z-index: 1000;
 			}
-			header div{
-				height: 88px;
-			}
-			.wall{
-				width: 100%;
-				height: 88px;
-				position: absolute;
-				top: 0;
-				left: 0;
-				background-color: white;
-				z-index: -500;
-			}
+            
+            .navbar {
+                height: 88px;
+                background-color: transparent;
+                background: transparent;
+                border-color: transparent;
+            }
+            
+            .navbar-nav {
+                margin-top: 20px; 
+                margin-left: 350px;
+            }
+            
+            nav .navbar-nav li a{
+                font-size: 1.2rem;
+                color: white !important;
+            }
+            
+            nav .navbar-nav.scrolled li a{
+                font-size: 1.2rem;
+                color: black !important;
+            }
+            
+            nav .navbar-nav li a:hover{
+                font-size: 1.2rem;
+                color: tomato!important;
+            }
+
+            .navbar-fixed-top.scrolled {
+              background-color: #fff !important;
+              transition: background-color 200ms linear;
+            }
+            
+            @media (max-width: 768px) {
+                .navbar-header {
+                    background-color: white;
+                }
+                
+                .navbar-nav {
+                    margin-top: 0px; 
+                    margin-left: 0px;
+                }
+                
+                nav .navbar-nav li a{
+                    font-size: 1.2rem;
+                    color: black!important;
+                }
+                
+                nav .navbar-nav li {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;  
+                    width: 100%;
+                    height: 20%; 
+                }
+                
+                 .navbar-collapse{
+                    background-color: white;
+                }
+                
+                #bs-example-navbar-collapse-1 {
+                    border-bottom-style: solid;
+                    border-bottom-color: lightgrey;
+                    border-bottom-width: 2px;
+                }
+                
+                
+            }
+            
+            
+            
+            
 			
 			/*Home*/
 			.Home{
@@ -92,7 +152,7 @@
 				z-index: 500;
 			}
 			.Home h3{
-					font-size: 40px !important;
+					font-size: 35px !important;
     				line-height: 1.5em !important;    				
     				letter-spacing: -0.03em;
     				font-weight: 100;
@@ -106,7 +166,7 @@
 			    letter-spacing: -0.03em;
 			}
 			.Home strong{
-				font-size: 40px;
+				font-size: 35px;
 				font-weight: bold;
 			}
 			
@@ -493,7 +553,37 @@
 	<body>
 		<div id="app" class="pst-r">
 			<header>
-				<div>
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button style="background-color: white; margin-top: 30px" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-left" href="#">
+                                <img alt="Brand" height="88" src="img/icon-bg-tsp.jpg">
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li v-if="langCn" @click="toDiv(index)" :class="{font_gray:fgray}" v-for="(item,index) in navData_e">
+                                    <a>
+                                        {{item}}
+                                    </a>
+                                </li>
+                                <li v-if="langEn" @click="toDiv(index)" :class="{font_gray:fgray}" v-for="(item,index) in navData_e">
+                                    <a>
+                                        {{item}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+<!--
+                				<div>
 					<div class="w30 pull-left flex-center">			
 						<img src="img/icon-bg-tsp.jpg" width="180" height="108"/>
 					</div>
@@ -515,6 +605,8 @@
 				<transition name="fade">
 					<div v-if="wall" class="wall"></div>
 				</transition>	
+-->
+
 			</header>
 			<section class="Home sb-img-fit">
 				<div class="container-fluid">
@@ -915,5 +1007,24 @@ services, maintenance, and cover the Australian cities.
 			}
 		})
 	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    
+    <script>
+        $(function () {
+          $(document).scroll(function () {
+            var $nav = $(".navbar-fixed-top");
+            var $navbar = $(".navbar-nav");
+            $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+            $navbar.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+          });
+          
+          $(document).on('click','.navbar-collapse.in',function(e) {
+                if( $(e.target).is('a') ) {
+                    $(this).collapse('hide');
+                }
+            });
+        });
+    </script>
 </html>
 
